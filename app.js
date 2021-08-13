@@ -17,8 +17,6 @@ nunjucks.configure('views', {
     watch : true,
 });
 
-console.log(config.development.username);
-
 const connection = mysql.createConnection({
     host : config.development.host,
     user : config.development.username,
@@ -29,9 +27,8 @@ connection.connect(function(err) {
     if (err) {
         throw err;
     } else {
-        connection.query("SELECT * FROM matematedb", function (err, rows, fields) {
+        connection.query("SELECT * FROM User", function (err, rows, fields) {
             console.log(rows);
-            console.log('server adfjladkfjl');
         })
     }
 });
