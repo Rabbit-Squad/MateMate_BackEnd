@@ -28,5 +28,8 @@ module.exports = class User extends Sequelize.Model {
             collate : 'utf8_general_ci',
         });
     }
-    static associate(db) {}
+    static associate(db) {
+        db.User.hasMany(db.Request, {foreignKey : 'requester', targetKey : 'id'});
+        db.User.hasMany(db.Post, {foreignKey : 'writer', targetKey : 'id'});
+    }
 };
