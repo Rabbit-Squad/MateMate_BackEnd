@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
+const config = require('./config/config.json');
 const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const { sequelize } = require('./models');
 const { runInNewContext } = require('vm');
+const mysql = require('mysql2');
+const { rootCertificates } = require('tls');
+
 
 const app = express(); 
 app.set('port', process.env.PORT || 3000);
@@ -11,6 +15,25 @@ app.set('view engine', 'html');
 nunjucks.configure('views', {
     express : app,
     watch : true,
+});
+
+console.log(config.development.username);
+
+const connection = mysql.createConnection({
+    host : config.development.host,
+    user : config.development.username,
+    password : config.development.password,
+    database : config.development.database
+});
+connection.connect(function(err) {
+    if (err) {
+        throw err;
+    } else {
+        connection.query("SELECT * FROM matematedb", function (err, rows, fields) {
+            console.log(rows);
+            console.log('server adfjladkfjl');
+        })
+    }
 });
 
 sequelize.sync({ force : false })
