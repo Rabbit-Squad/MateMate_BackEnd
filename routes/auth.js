@@ -4,6 +4,8 @@ const bcrypt = require('bcrypt');
 
 const router = express.Router();
 const signinRouter = require('./signin');
+const signupRouter = require('./signup');
+
 //로그인 { email, pw }
 router.post('/login', (req, res, next) => {
     const { email, pw } = req.body;
@@ -14,6 +16,10 @@ router.post('/login', (req, res, next) => {
     }
 });
 
+//회원가입
+router.post('/join', signupRouter);
+
 //로그인 
 router.get('/signin', signinRouter);
+
 module.exports = router;
