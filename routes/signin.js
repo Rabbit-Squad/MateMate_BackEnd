@@ -40,7 +40,7 @@ router.get('/signin', (req, res) => {
                 message = '로그인 성공';
             }
         }
-        res.status(resultCode).send(message);
+        res.status(resultCode).send(resultCode, message, {userIdx : rows[0].id});
     })
 })
 
