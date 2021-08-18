@@ -12,8 +12,6 @@ const connection = mysql.createConnection({
 
 router.get('/list', (req, res) => {
     const sql = `SELECT User.nickname, Post.deadline, Post.location, Post.min_num, Post.cur_num, Post.title, Post.content, Post.closed FROM Post INNER JOIN User ON Post.writer = User.id`;
-    //`SELECT * FROM Post INNER JOIN User ON Post.writer = User.id`;
-    const query = 'SELECT nickname AS ['
     connection.query(sql, function (err, rows) {
         if (err) {
             console.log(err);
