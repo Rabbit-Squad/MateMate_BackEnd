@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const router = express.Router();
 const signinRouter = require('./signin');
 const signupRouter = require('./signup');
+const listRouter = require('./list');
 
 //로그인 { email, pw }
 router.post('/login', (req, res, next) => {
@@ -21,5 +22,8 @@ router.post('/join', signupRouter);
 
 //로그인 
 router.get('/signin', signinRouter);
+
+//목록 가져오기
+router.get('/list', listRouter);
 
 module.exports = router;
