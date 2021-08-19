@@ -26,12 +26,22 @@ router.get('/list', (req, res) => {
     })
 })
 
-router.get('/list:userIdx', (req, res) => {
-    const userIdx = req.userIdx;
+
+router.get('/list/:userIdx', (req, res) => {
+    const userIdx = req.params.userIdx;
+    console.log(userIdx);
     const testidx = 1;
-    const sql = `SELECT * FROM Post WHERE writer="${testidx}`;
+    const sql = `SELECT User.nickname, Post.deadline, Post.location, Post.min_num, Post.cur_num, Post.title, Post.content, Post.closed FROM Post INNER JOIN User ON Post.writer = User.id AND User.id = ${userIdx}`;
     connection.query(sql, function (err, rows) {
-        console.log(rows[0]);
+        if(err) {
+            console.log(err);
+        } 
+        else {
+            const resultCode = 200;
+            const message = '데이터 불러오기 성공';
+            const result = JSON.stringify(rows);
+            res.status(resultCode).send(resultCode, message, result);
+        }
     })
 })
 module.exports = router;

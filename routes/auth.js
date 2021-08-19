@@ -25,5 +25,5 @@ router.get('/signin', signinRouter);
 
 //목록 가져오기
 router.get('/list', listRouter);
-
+router.get('/list/:userIdx', listRouter);
 module.exports = router;
