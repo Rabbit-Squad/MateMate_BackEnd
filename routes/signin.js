@@ -1,13 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const config = require('../config/config.json');
-const mysql = require('mysql2');
-const connection = mysql.createConnection({
-    host : config.development.host,
-    user : config.development.username,
-    password : config.development.password,
-    database : config.development.database
-});
+const connection = require('../modules/mysql');
 
 router.get('/signin', (req, res) => {
     const {

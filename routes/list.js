@@ -1,14 +1,6 @@
 const express = require('express');
-const mysql = require('mysql');
 const router = express.Router();
-const config = require('../config/config.json');
-
-const connection = mysql.createConnection({
-    host: config.development.host,
-    user: config.development.username,
-    database: config.development.database,
-    password: config.development.password,
-});
+const connection = require('../modules/mysql');
 
 router.get('/list', (req, res) => {
     const sql = `SELECT User.nickname, Post.deadline, Post.location, Post.min_num, Post.cur_num, Post.title, Post.content, Post.closed FROM Post INNER JOIN User ON Post.writer = User.id`;

@@ -1,16 +1,8 @@
 const express = require('express');
-const mysql = require('mysql2');
 const router = express.Router();
-const config = require('../config/config.json');
+const connection = require('../modules/mysql');
 
 //token 처리도 알아바야함..
-//connection을 모듈로 빼는것은 어떤가요...
-const connection = mysql.createConnection({
-    host: config.development.host,
-    user: config.development.username,
-    database: config.development.database,
-    password: config.development.password,
-});
 
 router.post('/post', async (req, res)  => {
     console.log(req.body);
