@@ -2,7 +2,6 @@ const express = require('express');
 const mysql = require('mysql2');
 const router = express.Router();
 const config = require('../config/config.json');
-const User = require('../models/user');
 
 const connection = mysql.createConnection({
     host: config.development.host,
@@ -12,7 +11,7 @@ const connection = mysql.createConnection({
 });
 
 //회원가입
-router.post('/join', (req, res) => {
+router.post('/join', async (req, res) => {
     const { nickname, email, pw } = req.body;
     console.log(`${nickname}, ${email}, ${pw}`);
     // 삽입 수행

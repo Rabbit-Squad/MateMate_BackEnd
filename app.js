@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const nunjucks = require('nunjucks');
 const { sequelize } = require('./models');
 const authRouter = require('./routes/auth');
+const postRouter = require('./routes/post');
 const mysql = require('mysql2');
 const session = require('express-session');
 const dotenv = require('dotenv');
@@ -68,7 +69,7 @@ app.use(session ({
 }));
 
 app.use('/', authRouter);
-
+app.use('/', postRouter);
 
 app.use((req, res, next) => {
     const error = new Error(`${req.method} ${req.url} 라우터가 없습니다. `);
