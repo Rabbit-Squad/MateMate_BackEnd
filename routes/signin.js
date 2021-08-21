@@ -13,7 +13,7 @@ router.get('/signin', (req, res) => {
     connection.query(sql, function (err, rows, fields) {
         if (err) {
             console.log(err);
-            res.status(statusCode.BAD_REQUEST).send(messageCode.REQUEST_FAIL);
+            res.status(statusCode.NOT_FOUND).send(messageCode.REQUEST_FAIL);
         }
         else {
             if (rows.length === 0) {

@@ -26,7 +26,7 @@ router.get('/list/:userIdx', (req, res) => {
     connection.query(sql, function (err, rows) {
         if(err) {
             console.log(err);
-            res.status(statusCode.BAD_REQUEST).send(messageCode.REQUEST_FAIL);
+            res.status(statusCode.NOT_FOUND).send(messageCode.REQUEST_FAIL);
         } 
         else {
             const result = JSON.stringify(rows);

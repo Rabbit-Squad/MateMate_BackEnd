@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const connection = require('../modules/mysql');
+const statusCode = require('../modules/status');
+const messageCode = require('../modules/message');
 
 //회원가입
 router.post('/join', async (req, res) => {
@@ -10,14 +12,14 @@ router.post('/join', async (req, res) => {
     const sql = `INSERT INTO User (nickname, email, pw) VALUES ('${nickname}', '${email}', '${pw}')`;    
     
     connection.query(sql, function (err, result) {        
-        var resultCode = 404;
-        var message = '회원가입 오류';
+        var resultCode = statusCode.NOT_FOUND;
+        var message = messageCode.SIGN_UP_FAIL;
 
         if (err) {
             console.log(err.message);
         } else {
-            resultCode = 200;
-            message = '회원가입 성공';
+            resultCode = statusCode.SUCCESS;
+            message = messageCode.SIGN_UP_SUCCESS;
         }
 
         res.status(resultCode).send(message);
