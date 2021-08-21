@@ -6,6 +6,7 @@ const router = express.Router();
 const signinRouter = require('./signin');
 const signupRouter = require('./signup');
 const listRouter = require('./list');
+const requestRouter = require('./request');
 
 //로그인 { email, pw }
 router.post('/login', (req, res, next) => {
@@ -26,4 +27,6 @@ router.get('/signin', signinRouter);
 //목록 가져오기
 router.get('/list', listRouter);
 router.get('/list/:userIdx', listRouter);
+
+router.post('/request/:postIdx', requestRouter);
 module.exports = router;
