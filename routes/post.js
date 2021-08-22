@@ -4,7 +4,10 @@ const connection = require('../modules/mysql');
 const statusCode = require('../modules/status');
 const messageCode = require('../modules/message');
 const message = require('../modules/message');
-//token 처리도 알아바야함..
+const approvalRouter = require('./approval');
+
+//요청 승인
+router.post('/approval/:reqIdx', approvalRouter);
 
 router.post('/post', async (req, res)  => {
     console.log(req.body);

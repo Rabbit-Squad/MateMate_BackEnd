@@ -9,5 +9,7 @@ module.exports = {
     POST_FAIL : '게시물 작성 오류',
     POST_SUCCESS : '게시물 작성 성공',
     REQUEST_FAIL : '신청 실패',
-    REQUEST_SUCCESS : '신청 성공'
+    REQUEST_SUCCESS : '신청 성공',
+    APPROVAL_SUCCESS : '승인 성공',
+    APPROVAL_FAIL : '승인 실패',
 }

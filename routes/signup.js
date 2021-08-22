@@ -7,7 +7,7 @@ const messageCode = require('../modules/message');
 //회원가입
 router.post('/join', async (req, res) => {
     const { nickname, email, pw } = req.body;
-    console.log(`${nickname}, ${email}, ${pw}`);
+    //console.log(`${nickname}, ${email}, ${pw}`);
     // 삽입 수행
     const sql = `INSERT INTO User (nickname, email, pw) VALUES ('${nickname}', '${email}', '${pw}')`;    
     
