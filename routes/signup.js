@@ -3,11 +3,12 @@ const router = express.Router();
 const connection = require('../modules/mysql');
 const statusCode = require('../modules/status');
 const messageCode = require('../modules/message');
+const jwt = require('jsonwebtoken');
 
 //회원가입
 router.post('/join', async (req, res) => {
     const { nickname, email, pw } = req.body;
-    //console.log(`${nickname}, ${email}, ${pw}`);
+
     // 삽입 수행
     const sql = `INSERT INTO User (nickname, email, pw) VALUES ('${nickname}', '${email}', '${pw}')`;    
     
@@ -17,12 +18,21 @@ router.post('/join', async (req, res) => {
 
         if (err) {
             console.log(err.message);
+            return res.status(resultCode).send(message);
         } else {
             resultCode = statusCode.SUCCESS;
             message = messageCode.SIGN_UP_SUCCESS;
-        }
 
-        res.status(resultCode).send(message);
+            var token = jwt.sign({
+                email: email
+            }, process.env.JWT_SECRET);
+        }        
+
+        return res.status(resultCode).json({
+            code: resultCode,
+            message: message,
+            token: token
+        });
     });  
 });
 
