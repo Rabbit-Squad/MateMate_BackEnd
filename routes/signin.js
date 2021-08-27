@@ -5,7 +5,7 @@ const statusCode = require('../modules/status');
 const messageCode = require('../modules/message');
 const jwt = require('jsonwebtoken');
 
-router.get('/signin', (req, res) => {
+router.post('/signin', (req, res) => {
     const {
         email,
         pw

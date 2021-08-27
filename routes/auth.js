@@ -22,7 +22,7 @@ router.post('/login', (req, res, next) => {
 router.post('/join', signupRouter);
 
 //로그인 
-router.get('/signin', signinRouter);
+router.post('/signin', signinRouter);
 
 //목록 가져오기
 router.get('/list', listRouter);
