@@ -29,10 +29,10 @@ router.post('/signin', (req, res) => {
                     email: email
                 }, process.env.JWT_SECRET);
 
-                //return res.status(statusCode.SUCCESS).send(statusCode.SUCCESS, messageCode.SUCCESS, {userIdx : rows[0].id});
                 return res.status(statusCode.SUCCESS).json({
                     code: statusCode.SUCCESS,
                     message: messageCode.SIGN_IN_SUCCESS,
+                    userIdx : rows[0].id,
                     token: token
                 });                                    
             }
