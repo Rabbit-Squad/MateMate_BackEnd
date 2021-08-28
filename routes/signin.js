@@ -4,6 +4,7 @@ const connection = require('../modules/mysql');
 const statusCode = require('../modules/status');
 const messageCode = require('../modules/message');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 router.post('/signin', (req, res) => {
     const {
@@ -11,6 +12,7 @@ router.post('/signin', (req, res) => {
         pw
     } = req.body;
     const sql = `SELECT * FROM User WHERE email="${email}"`;
+    const hash = await bcrypt.hash(pw, 12);
     connection.query(sql, function (err, rows, fields) {
         if (err) {
             console.log(err);
@@ -21,7 +23,7 @@ router.post('/signin', (req, res) => {
                 return res.status(statusCode.MATCH_ERR).send(messageCode.INVALID_USER);
             }
             
-            else if (pw !== rows[0].pw) {
+            else if (hash !== rows[0].pw) {
                 return res.status(statusCode.MATCH_ERR).send(messageCode.INVALID_PW);
             } 
             else {
