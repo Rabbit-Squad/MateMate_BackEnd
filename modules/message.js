@@ -12,4 +12,6 @@ module.exports = {
     REQUEST_SUCCESS : '신청 성공',
     APPROVAL_SUCCESS : '승인 성공',
     APPROVAL_FAIL : '승인 실패',
+    UNAUTHORIZED: '유효하지 않은 토큰',
+    TOKEN_EXPIRED: '토큰 만료',
 }

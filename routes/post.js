@@ -37,7 +37,10 @@ router.post('/post', async (req, res)  => {
             message = messageCode.POST_SUCCESS;
         }
 
-        res.status(resultCode).send(message);
+        return res.status(resultCode).json({
+            status: resultCode,
+            message: message
+        });    
     });
     
 });

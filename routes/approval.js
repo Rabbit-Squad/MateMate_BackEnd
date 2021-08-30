@@ -37,7 +37,10 @@ router.post('/approval/:reqIdx', async (req, res) => {
             message = messageCode.APPROVAL_SUCCESS;
         }
 
-        res.status(resultCode).send(message);
+        return res.status(resultCode).json({
+            status: resultCode,
+            message: message
+        });
     });
 
 });
