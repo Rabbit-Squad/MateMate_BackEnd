@@ -9,11 +9,17 @@ router.get('/list', (req, res) => {
     connection.query(sql, function (err, rows) {
         if (err) {
             console.log(err);
-            res.status(statusCode.BAD_REQUEST).send(messageCode.REQUEST_FAIL);
+            res.status(statusCode.BAD_REQUEST).json({
+                status : statusCode.BAD_REQUEST,
+                message : messageCode.REQUEST_FAIL
+            })
         }
         else {
-            const result = JSON.stringify(rows);
-            res.status(statusCode.SUCCESS).send(statusCode.SUCCESS, messageCode.SUCCESS, result);
+            res.status(statusCode.SUCCESS).json({
+                status : statusCode.SUCCESS,
+                message : messageCode.SUCCESS,
+                data : rows
+            })
         }
     })
 })
@@ -26,11 +32,17 @@ router.get('/list/:userIdx', (req, res) => {
     connection.query(sql, function (err, rows) {
         if(err) {
             console.log(err);
-            res.status(statusCode.NOT_FOUND).send(messageCode.REQUEST_FAIL);
+            res.status(statusCode.NOT_FOUND).json({
+                status : statusCode.BAD_REQUEST,
+                message : messageCode.REQUEST_FAIL
+            })
         } 
         else {
-            const result = JSON.stringify(rows);
-            res.status(statusCode.SUCCESS).send(statusCode.SUCCESS, messageCode.SUCCESS, result);
+            res.status(statusCode.SUCCESS).json({
+                status : statusCode.SUCCESS,
+                message : messageCode.SUCCESS,
+                data : rows
+            });
         }
     })
 })
