@@ -17,7 +17,7 @@ router.get('/list', (req, res) => {
         else {
             res.status(statusCode.SUCCESS).json({
                 status : statusCode.SUCCESS,
-                message : messageCode.SUCCESS,
+                message : messageCode.LIST_SUCCESS,
                 data : rows
             })
         }
@@ -40,7 +40,7 @@ router.get('/list/:userIdx', (req, res) => {
         else {
             res.status(statusCode.SUCCESS).json({
                 status : statusCode.SUCCESS,
-                message : messageCode.SUCCESS,
+                message : messageCode.LIST_SUCCESS,
                 data : rows
             });
         }
