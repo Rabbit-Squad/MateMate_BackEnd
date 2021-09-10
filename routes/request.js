@@ -22,7 +22,7 @@ router.post('/request/:postIdx', async (req, res) => {
         }
         return res.status(status).json({
             code: status,
-            message: message,
+            message: message
         });
     })
 })
