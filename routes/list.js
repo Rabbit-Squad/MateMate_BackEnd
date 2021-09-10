@@ -5,7 +5,7 @@ const statusCode = require('../modules/status');
 const messageCode = require('../modules/message');
 
 router.get('/list', (req, res) => {
-    const sql = `SELECT User.nickname, Post.deadline, Post.location, Post.min_num, Post.cur_num, Post.title, Post.content, Post.closed FROM Post INNER JOIN User ON Post.writer = User.id`;
+    const sql = `SELECT User.nickname, Post.id, Post.deadline, Post.location, Post.min_num, Post.cur_num, Post.title, Post.content, Post.closed FROM Post INNER JOIN User ON Post.writer = User.id`;
     connection.query(sql, function (err, rows) {
         if (err) {
             console.log(err);
