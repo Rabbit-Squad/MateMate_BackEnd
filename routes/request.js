@@ -20,7 +20,10 @@ router.post('/request/:postIdx', async (req, res) => {
             status = statusCode.SUCCESS;
             message = statusCode.REQUEST_SUCCESS;
         }
-        res.status(status).send(message);
+        return res.status(status).json({
+            code: status,
+            message: message,
+        });
     })
 })
 
