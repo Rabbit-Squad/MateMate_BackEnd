@@ -7,6 +7,7 @@ const signinRouter = require('./signin');
 const signupRouter = require('./signup');
 const listRouter = require('./list');
 const requestRouter = require('./request');
+const profileRouter = require('./profile');
 
 //로그인 { email, pw }
 router.post('/login', (req, res, next) => {
@@ -29,4 +30,7 @@ router.get('/list', listRouter);
 router.get('/list/:userIdx', listRouter);
 
 router.post('/request/:postIdx', requestRouter);
+
+router.get('/profile/:userIdx', profileRouter);
+router.delete('/profile/delete/:userIdx', profileRouter); 
 module.exports = router;

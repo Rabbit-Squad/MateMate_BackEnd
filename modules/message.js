@@ -14,4 +14,6 @@ module.exports = {
     APPROVAL_FAIL : '승인 실패',
     UNAUTHORIZED: '유효하지 않은 토큰',
     TOKEN_EXPIRED: '토큰 만료',
+    GET_USER_INFO_SUCCESS: '유저 정보 확인 성공',
+    DELETE_USER_SUCCESS: '회원 탈퇴 성공',
 }
