@@ -30,6 +30,7 @@ router.get('/list', listRouter);
 router.get('/list/:userIdx', listRouter);
 
 router.post('/request/:postIdx', requestRouter);
+router.get('/request/mypost/:userIdx', requestRouter);
 
 router.get('/profile/:userIdx', profileRouter);
 router.delete('/profile/delete/:userIdx', profileRouter); 
