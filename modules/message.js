@@ -5,6 +5,7 @@ module.exports = {
     SIGN_UP_FAIL : '회원가입 실패',
     SIGN_UP_SUCCESS : '회원가입 성공',
     LIST_SUCCESS : '데이터 불러오기 성공',
+    LIST_FAIL : '데이터 불러오기 실패',
     MISS_DATA : '필요한 데이터 누락',
     POST_FAIL : '게시물 작성 오류',
     POST_SUCCESS : '게시물 작성 성공',

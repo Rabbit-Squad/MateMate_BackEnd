@@ -11,7 +11,7 @@ router.get('/list', (req, res) => {
             console.log(err);
             res.status(statusCode.BAD_REQUEST).json({
                 status : statusCode.BAD_REQUEST,
-                message : messageCode.REQUEST_FAIL
+                message : messageCode.LIST_FAIL
             })
         }
         else {
@@ -34,7 +34,7 @@ router.get('/list/:userIdx', (req, res) => {
             console.log(err);
             res.status(statusCode.NOT_FOUND).json({
                 status : statusCode.BAD_REQUEST,
-                message : messageCode.REQUEST_FAIL
+                message : messageCode.LIST_FAIL
             })
         } 
         else {
