@@ -26,6 +26,13 @@ router.post('/post', async (req, res)  => {
         content
     } = req.body;
 
+    if (!userId | !deadline | !location | !min_num | !title | !content) {
+        return res.status(statusCode.BAD_REQUEST).json({
+            status: statusCode.BAD_REQUEST,
+            message: messageCode.POST_FAIL
+        });  
+    }
+    
     const sql = (`INSERT INTO Post (writer, deadline, location, min_num, cur_num, title, content, closed) VALUES (${userId}, '${deadline}', '${location}', ${min_num}, 1, '${title}', '${content}', 0)`);
 
     connection.query(sql, (err, result) => {
