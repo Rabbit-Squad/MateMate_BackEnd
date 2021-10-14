@@ -27,8 +27,9 @@ router.post('/request/:postIdx', async (req, res) => {
     })
 })
 
+//내 게시글 신청자 조회
 router.get('/request/mypost/:userIdx', async (req, res) => {
-    const sql = `SELECT Post.title, User.nickname, Request.content, Request.arrive_time FROM Request INNER JOIN Post ON Post.id = Request.post AND Post.writer = ${req.params.userIdx} JOIN User ON User.id = Request.requester`;
+    const sql = `SELECT Post.title, User.nickname, Request.id, Request.content, Request.arrive_time FROM Request INNER JOIN Post ON Post.id = Request.post AND Post.writer = ${req.params.userIdx} JOIN User ON User.id = Request.requester`;
     connection.query(sql, (error, result) => {
         var status = statusCode.NOT_FOUND;
         var message = messageCode.LIST_FAIL;
