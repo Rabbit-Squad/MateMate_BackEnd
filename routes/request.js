@@ -10,7 +10,6 @@ router.post('/request/:postIdx', async (req, res) => {
         content,
         arrive_time,
     } = req.body;
-    console.log(req.params.postIdx);
 
     const sql = `INSERT INTO Request (requester, content, arrive_time, post, approval) VALUES (${userId}, '${content}', '${arrive_time}', ${req.params.postIdx}, 0)`;
     connection.query(sql, (error, result) => {
