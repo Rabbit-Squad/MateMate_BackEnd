@@ -9,12 +9,12 @@ router.post('/request/:postIdx', async (req, res) => {
         userId,
         content,
         arrive_time,
-    } = req.body;
-
-    const sql = `INSERT INTO Request (requester, content, arrive_time, post, approval) VALUES (${userId}, '${content}', '${arrive_time}', ${req.params.postIdx}, 0)`;
+    } = req.body; 
+    const sql = `INSERT INTO Request (requester, content, arrive_time, post, approval) SELECT ${userId}, '${content}', '${arrive_time}', ${req.params.postIdx}, 0 from dual 
+    where not exists (SELECT * FROM Post, Request WHERE Request.requester = ${userId} and Post.id = ${req.params.postIdx})`;
     connection.query(sql, (error, result) => {
-        var status = statusCode.BAD_REQUEST;
-        var message = messageCode.REQUEST_FAIL;
+        let status = statusCode.BAD_REQUEST;
+        let message = messageCode.REQUEST_FAIL;
         if(!error) {
             status = statusCode.SUCCESS;
             message = statusCode.REQUEST_SUCCESS;
@@ -30,8 +30,8 @@ router.post('/request/:postIdx', async (req, res) => {
 router.get('/request/mypost/:userIdx', async (req, res) => {
     const sql = `SELECT Post.title, User.nickname, Request.id, Request.content, Request.arrive_time FROM Request INNER JOIN Post ON Post.id = Request.post AND Post.writer = ${req.params.userIdx} JOIN User ON User.id = Request.requester`;
     connection.query(sql, (error, result) => {
-        var status = statusCode.NOT_FOUND;
-        var message = messageCode.LIST_FAIL;
+        let status = statusCode.NOT_FOUND;
+        let message = messageCode.LIST_FAIL;
         if(!error) {
             status = statusCode.SUCCESS;
             message = messageCode.LIST_SUCCESS;

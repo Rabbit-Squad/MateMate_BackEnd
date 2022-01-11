@@ -10,10 +10,7 @@ const approvalRouter = require('./approval');
 router.post('/approval/:reqIdx', approvalRouter);
 
 router.post('/post', async (req, res)  => {
-    console.log(req.body);
-
-    if (!req.body.userId) {
-        //return res.status(400).send("유저 정보 없음"); //에러    
+    if (!req.body.userId) {  
         return res.status(statusCode.BAD_REQUEST).send(messageCode.MISS_DATA);
     }
 
@@ -36,8 +33,8 @@ router.post('/post', async (req, res)  => {
     const sql = (`INSERT INTO Post (writer, deadline, location, min_num, cur_num, title, content, closed) VALUES (${userId}, '${deadline}', '${location}', ${min_num}, 1, '${title}', '${content}', 0)`);
 
     connection.query(sql, (err, result) => {
-        var resultCode = statusCode.NOT_FOUND;
-        var message = messageCode.POST_FAIL;
+        const resultCode = statusCode.NOT_FOUND;
+        const message = messageCode.POST_FAIL;
 
         if (!err) {
             resultCode = statusCode.SUCCESS;
