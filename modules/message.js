@@ -9,6 +9,7 @@ module.exports = {
     MISS_DATA : '필요한 데이터 누락',
     POST_FAIL : '게시물 작성 오류',
     POST_SUCCESS : '게시물 작성 성공',
+    INVALID_DATE : '유효하지 않은 날짜',
     REQUEST_FAIL : '신청 실패',
     REQUEST_SUCCESS : '신청 성공',
     APPROVAL_SUCCESS : '승인 성공',
