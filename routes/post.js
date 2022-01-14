@@ -27,15 +27,15 @@ router.post('/post', async (req, res)  => {
     }
 
     const currentDate = new Date();
-    const deadlineDate = new Date(deadline); //deadline이 현재로부터 24시간 이내의 미래인가? 
-    const between = Math.floor((deadlineDate.getTime() - currentDate.getTime()) / 1000 / 60 / 60);
+    const deadlineDate = new Date(deadline); //deadline이 현재로부터 5분 ~ 60분(1시간) 사이의 미래인가? 
+    const between = Math.floor((deadlineDate.getTime() - currentDate.getTime()) / 1000 / 60);
     
-    if (between >= 24 || between < 0) {
+    if (between < 5 || between > 60) {
         return res.status(statusCode.BAD_REQUEST).json({
             status: statusCode.BAD_REQUEST,
             message: messageCode.INVALID_DATE
         });  
-    } //과거나 24시간 이상의 미래가 나온 경우 
+    } // 과거, 글 작성 시점보다 5분 이내의 미래, 60분넘는 미래인 경우엔 모임시간 지정 불가능.
     
     const sql = (`INSERT INTO Post (writer, deadline, location, min_num, cur_num, title, content, closed) VALUES (${userId}, '${deadline}', '${location}', ${min_num}, 1, '${title}', '${content}', 0)`);
     connection.query(sql, (err, result) => {
