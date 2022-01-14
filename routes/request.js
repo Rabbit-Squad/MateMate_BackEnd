@@ -11,7 +11,7 @@ router.post('/request/:postIdx', async (req, res) => {
         arrive_time,
     } = req.body; 
     const sql = `INSERT INTO Request (requester, content, arrive_time, post, approval) SELECT ${userId}, '${content}', '${arrive_time}', ${req.params.postIdx}, 0 from dual 
-    where not exists (SELECT * FROM Post, Request WHERE Request.requester = ${userId} and Post.id = ${req.params.postIdx})`;
+    where not exists (SELECT * FROM Post, Request WHERE Request.requester = ${userId} and Post.id = ${req.params.postIdx} and Post.closed = 1)`; //1이 닫힌거였나
     connection.query(sql, (error, result) => {
         let status = statusCode.BAD_REQUEST;
         let message = messageCode.REQUEST_FAIL;
