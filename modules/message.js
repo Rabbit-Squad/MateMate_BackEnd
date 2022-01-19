@@ -12,6 +12,7 @@ module.exports = {
     INVALID_DATE : '유효하지 않은 날짜',
     REQUEST_FAIL : '신청 실패',
     REQUEST_SUCCESS : '신청 성공',
+    INVALID_REQUEST : '마감되었거나 신청 권한이 없습니다.',
     APPROVAL_SUCCESS : '승인 성공',
     APPROVAL_FAIL : '승인 실패',
     UNAUTHORIZED: '유효하지 않은 토큰',

@@ -10,19 +10,44 @@ router.post('/request/:postIdx', async (req, res) => {
         content,
         arrive_time,
     } = req.body; 
-    const sql = `INSERT INTO Request (requester, content, arrive_time, post, approval) SELECT ${userId}, '${content}', '${arrive_time}', ${req.params.postIdx}, 0 from dual 
-    where not exists (SELECT * FROM Post, Request WHERE Request.requester = ${userId} and Post.id = ${req.params.postIdx} and Post.closed = 1)`; //1이 닫힌거였나
-    connection.query(sql, (error, result) => {
-        let status = statusCode.BAD_REQUEST;
-        let message = messageCode.REQUEST_FAIL;
-        if(!error) {
-            status = statusCode.SUCCESS;
-            message = statusCode.REQUEST_SUCCESS;
+    const firstSql = `SELECT distinct Post.id FROM Post, Request WHERE Post.writer = ${userId} or Post.closed = 1 UNION SELECT Request.post FROM Request where Request.requester = ${userId};`//내 글, 마감된 글, 이미 신청한 글 
+    connection.query(firstSql, (error, result) => {
+        console.log(result.length);
+        const resultArray = new Array(result.length);
+        for(let i = 0; i<result.length; i++) {
+            resultArray[i] = result[i].id // 작성이 불가한 post.id를 가져와서 resultArray에 저장
         }
-        return res.status(status).json({
-            code: status,
-            message: message
-        });
+        if(!error) {
+            if (resultArray.includes(Number(req.params.postIdx)) === true) {
+                return res.status(statusCode.BAD_REQUEST).json({ 
+                    code: statusCode.BAD_REQUEST,
+                    message: messageCode.INVALID_REQUEST
+                }); // 마감, 이미 신청한 글, 내 글인 경우 신청 불가
+            }
+            else { // 신청 가능한 글인 경우 
+                const sql = `INSERT INTO Request (requester, content, arrive_time, post, approval) SELECT ${userId}, '${content}', '${arrive_time}', ${req.params.postIdx}, 0 from dual;`
+                connection.query(sql, (error, result) => {
+                    if(!error) {
+                        return res.status(statusCode.SUCCESS).json({
+                            code: statusCode.SUCCESS,
+                            message: messageCode.REQUEST_SUCCESS
+                        }); //정상 처리
+                    } 
+                    else {
+                        return res.status(statusCode.BAD_REQUEST).json({
+                            code: statusCode.BAD_REQUEST,
+                            message: messageCode.REQUEST_FAIL
+                        }); //에러 발생
+                    }
+                })
+            }
+        } 
+        else { //첫 번째 쿼리부터 실패. 
+            return res.status(statusCode.BAD_REQUEST).json({
+                code: statusCode.BAD_REQUEST,
+                message: messageCode.REQUEST_FAIL
+            });
+        }
     })
 })
 
