@@ -10,8 +10,17 @@ router.post('/request/:postIdx', async (req, res) => {
         content,
         arrive_time,
     } = req.body; 
-    const firstSql = `SELECT distinct Post.id FROM Post, Request WHERE Post.writer = ${userId} or Post.closed = 1 UNION SELECT Request.post FROM Request where Request.requester = ${userId};`//내 글, 마감된 글, 이미 신청한 글 
-    connection.query(firstSql, (error, result) => {
+
+    const time = arrive_time.split(':');
+    if (time[1] > 50 || time[1] < 1) {
+        return res.status(statusCode.BAD_REQUEST).json({ 
+            code: statusCode.BAD_REQUEST,
+            message: messageCode.INVALID_DATE
+        }); 
+    }
+
+    const secondSql = `SELECT distinct Post.id FROM Post, Request WHERE Post.writer = ${userId} or Post.closed = 1 UNION SELECT Request.post FROM Request where Request.requester = ${userId};`//내 글, 마감된 글, 이미 신청한 글 
+    connection.query(secondSql, (error, result) => {
         console.log(result.length);
         const resultArray = new Array(result.length);
         for(let i = 0; i<result.length; i++) {
