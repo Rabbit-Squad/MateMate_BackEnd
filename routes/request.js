@@ -11,6 +11,13 @@ router.post('/request/:postIdx', async (req, res) => {
         arrive_time,
     } = req.body; 
 
+    if (!content || !userId || !arrive_time || !req.params.postIdx) { //필요한 정보가 누락된 경우
+        return res.status(statusCode.BAD_REQUEST).json({
+            code : statusCode.BAD_REQUEST,
+            message : messageCode.INVALID_REQUEST 
+        })
+    }
+
     const time = arrive_time.split(':');
     if (time[1] > 50 || time[1] < 1) {
         return res.status(statusCode.BAD_REQUEST).json({ 
