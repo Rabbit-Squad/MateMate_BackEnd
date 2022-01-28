@@ -17,32 +17,29 @@ router.post('/approval/:reqIdx', async (req, res) => {
 
     const id = req.params.reqIdx;
     
-    var sql;    
+    let sql;    
     //Request의 Approval을 업데이트
-    sql = `UPDATE Request SET approval=${approval} WHERE id = ${id}`;
-
-    if (approval === 1)
+    sql = `UPDATE Request SET approval=${approval} WHERE Request.id = ${id}`;
+    
+    if (approval === 1) //1인 경우가 승인
     {
         sql += `; UPDATE Post P INNER JOIN Request R on P.id = R.post SET P.cur_num = cur_num + 1`;
     }
-
+    
     connection.query(sql, (err, result) => {
-        var resultCode = statusCode.NOT_FOUND;
-        var message = messageCode.APPROVAL_FAIL;
-
-        if (err) {
-            console.log(err.message);
-        } else {
-            resultCode = statusCode.SUCCESS;
-            message = messageCode.APPROVAL_SUCCESS;
+        if (!err) {
+            return res.status(statusCode.SUCCESS).json({
+                status : statusCode.SUCCESS,
+                message : messageCode.APPROVAL_SUCCESS
+            })
+        } 
+        else {
+            return res.status(statusCode.BAD_REQUEST).json({
+                status: statusCode.BAD_REQUEST,
+                message: messageCode.APPROVAL_FAIL
+            });
         }
-
-        return res.status(resultCode).json({
-            status: resultCode,
-            message: message
-        });
-    });
-
+    }); 
 });
 
 module.exports = router;
