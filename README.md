@@ -1,6 +1,10 @@
 # 💘 MateMate ? 
 - 밥 혼자 먹기 싫을 때, 같이 밥 먹을 수 있는 Mate를 만날 수 있는 소셜 네트워크 플랫폼  
 - 같이 먹고 싶은 Mate들 모두 모여! 
+- 2020.08 develop START! 
+
+# 💗 Project Design
+<img src = https://user-images.githubusercontent.com/50194490/151659830-f33afd42-ba94-414b-935b-7f0cfecf6d20.jpg width="70%">
 
 # 🐰 About Team Rabbit-Squad 
 | 이름  | 포지션 |
@@ -14,19 +18,20 @@
 
 # 💛 Library  
 ```
-+-- bcrypt@5.0.1
-+-- body-parser@1.19.0
-+-- cookie-parser@1.4.5
-+-- dotenv@10.0.0
-+-- express@4.17.1
-+-- express-session@1.17.2
-+-- jsonwebtoken@8.5.1
-+-- morgan@1.10.0
-+-- multer@1.4.3
-+-- mysql@2.18.1
-+-- mysql2@2.3.0
-+-- nodemon@2.0.12
-+-- nunjucks@3.2.3
+- bcrypt@5.0.1
+- body-parser@1.19.0
+- cookie-parser@1.4.5
+- dotenv@10.0.0
+- express@4.17.1
+- express-session@1.17.2
+- jsonwebtoken@8.5.1
+- morgan@1.10.0
+- multer@1.4.3
+- mysql@2.18.1
+- mysql2@2.3.0
+- nodemon@2.0.12
+- nunjucks@3.2.3
+- pm2@5.1.1
 ```
 
 
