@@ -1,7 +1,7 @@
 # 💘 MateMate ? 
-- 밥 혼자 먹기 싫을 때, 같이 밥 먹을 수 있는 Mate를 만날 수 있는 소셜 네트워크 플랫폼  
+- 밥 혼자 먹기 싫을 때, 혼자 먹기엔 많을 때! 함께 밥 먹을 수 있는 Mate를 만날 수 있는 소셜 네트워크 플랫폼  
 - 같이 먹고 싶은 Mate들 모두 모여! 
-- 2020.08 develop START! 
+- 2021.08 develop START! 
 
 # 💗 Project Design
 <img src = https://user-images.githubusercontent.com/50194490/151659830-f33afd42-ba94-414b-935b-7f0cfecf6d20.jpg width="70%">
